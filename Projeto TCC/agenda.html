@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda e Eventos - Clube do Livro IFRN</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f1e9;
+      color: #333;
+    }
+
+    header {
+      background-color: #5c3d2e;
+      color: #fff;
+      padding: 20px 15px;
+      text-align: center;
+    }
+
+    header h2 {
+      margin: 0 0 5px 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    nav {
+      background-color: #8b5e3c;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      display: inline-block;
+      padding: 5px 10px;
+    }
+
+    nav a:hover, nav a.active {
+      text-decoration: underline;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    h3 {
+      color: #5c3d2e;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      border-bottom: 2px solid #f5f1e9;
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #5c3d2e;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #8b5e3c;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    button, .btn {
+      background-color: #5c3d2e;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    button:hover, .btn:hover {
+      background-color: #7a5238;
+    }
+
+    .btn-presenca {
+      background-color: #2e7d32;
+    }
+
+    .btn-presenca:hover {
+      background-color: #1b5e20;
+    }
+
+    .btn-confirmado {
+      background-color: #1565c0;
+    }
+
+    .btn-confirmado:hover {
+      background-color: #0d47a1;
+    }
+
+    .btn-excluir {
+      background-color: #c62828;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .btn-excluir:hover {
+      background-color: #b71c1c;
+    }
+
+    /* Event Filters & Header */
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filter-header h3 {
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+
+    .filter-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-controls select {
+      width: auto;
+      padding: 6px 12px;
+    }
+
+    /* Event Cards */
+    .evento-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .evento-item {
+      background: #faf8f5;
+      border-left: 5px solid #8b5e3c;
+      padding: 18px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .evento-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .evento-titulo {
+      margin: 0;
+      color: #5c3d2e;
+      font-size: 18px;
+    }
+
+    .badge-tipo {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .badge-Encontro { background-color: #8b5e3c; }
+    .badge-Oficina { background-color: #2e7d32; }
+    .badge-Palestra { background-color: #d84315; }
+    .badge-Debate { background-color: #6a1b9a; }
+
+    .evento-meta {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .evento-desc {
+      margin: 0 0 15px 0;
+      line-height: 1.5;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .evento-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #e2ddd5;
+    }
+
+    .presenca-status {
+      font-size: 13px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #5c3d2e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+
+    .sem-eventos {
+      text-align: center;
+      color: #888;
+      padding: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>📅 Agenda e Eventos</h2>
+  <p>Clube do Livro IFRN - Acompanhe nossos encontros, oficinas e palestras</p>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="livros(1).html">Livros</a>
+  <a href="agenda.html" class="active">Agenda</a>
+  <a href="discussao.html">Discussões</a>
+  <a href="cadastro.html">Cadastre-se</a>
+  <a href="login.html">Entrar</a>
+</nav>
+
+<div class="container">
+
+  <!-- Formulário de Cadastro de Eventos -->
+  <div class="card">
+    <h3>➕ Cadastrar Novo Evento</h3>
+    <form id="formEvento" onsubmit="adicionarEvento(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="titulo">Título do Evento *</label>
+          <input type="text" id="titulo" placeholder="Ex: Roda de Leitura: Dom Casmurro" required>
+        </div>
+        <div class="form-group">
+          <label for="tipo">Tipo de Evento *</label>
+          <select id="tipo" required>
+            <option value="">Selecione o tipo</option>
+            <option value="Encontro">Encontro / Roda de Leitura</option>
+            <option value="Oficina">Oficina Literária</option>
+            <option value="Palestra">Palestra / Bate-papo</option>
+            <option value="Debate">Debate de Livro do Mês</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="data">Data e Horário *</label>
+          <input type="datetime-local" id="data" required>
+        </div>
+        <div class="form-group">
+          <label for="local">Local / Link *</label>
+          <input type="text" id="local" placeholder="Ex: Biblioteca Central ou Google Meet" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição / Pauta</label>
+        <textarea id="descricao" rows="3" placeholder="Detalhes do encontro, capítulos a serem lidos, convidados..."></textarea>
+      </div>
+
+      <button type="submit">Cadastrar Evento</button>
+    </form>
+  </div>
+
+  <!-- Lista de Eventos e Calendário -->
+  <div class="card">
+    <div class="filter-header">
+      <h3>📆 Próximos Eventos & Encontros</h3>
+      <div class="filter-controls">
+        <label for="filtroTipo">Filtrar por:</label>
+        <select id="filtroTipo" onchange="mostrarEventos()">
+          <option value="todos">Todos os Tipos</option>
+          <option value="Encontro">Encontros</option>
+          <option value="Oficina">Oficinas</option>
+          <option value="Palestra">Palestras</option>
+          <option value="Debate">Debates</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="listaEventos" class="evento-list">
+      <!-- Inserido dinamicamente via JS -->
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Projeto acadêmico - Clube do Livro IFRN</p>
+</footer>
+
+<script>
+  // Eventos iniciais demonstrativos caso o localStorage esteja vazio
+  const eventosIniciais = [
+    {
+      id: "evt_1",
+      titulo: "Discussão do Livro do Mês: 1984",
+      tipo: "Debate",
+      data: "2026-08-15T14:30",
+      local: "Biblioteca do IFRN - Sala 04",
+      descricao: "Encontro presencial para debater as reflexões sobre totalitarismo, vigilância e liberdade na obra de George Orwell.",
+      confirmados: 6
+    },
+    {
+      id: "evt_2",
+      titulo: "Oficina: Como Escrever Resenhas Críticas",
+      tipo: "Oficina",
+      data: "2026-08-20T16:00",
+      local: "Laboratório de Informática 02",
+      descricao: "Aprenda técnicas para estruturar resenhas literárias e compartilhar sua opinião no fórum do clube.",
+      confirmados: 9
+    },
+    {
+      id: "evt_3",
+      titulo: "Palestra: A Literatura Potiguar Contemporânea",
+      tipo: "Palestra",
+      data: "2026-08-28T10:00",
+      local: "Auditório Principal do IFRN",
+      descricao: "Bate-papo exclusivo sobre o processo criativo e a produção literária no Rio Grande do Norte.",
+      confirmados: 14
+    }
+  ];
+
+  function inicializarEventos() {
+    if (!localStorage.getItem("eventos_clube")) {
+      localStorage.setItem("eventos_clube", JSON.stringify(eventosIniciais));
+    }
+  }
+
+  function adicionarEvento(e) {
+    e.preventDefault();
+    
+    let titulo = document.getElementById("titulo").value.trim();
+    let tipo = document.getElementById("tipo").value;
+    let data = document.getElementById("data").value;
+    let local = document.getElementById("local").value.trim();
+    let descricao = document.getElementById("descricao").value.trim();
+
+    if (!titulo || !tipo || !data || !local) return;
+
+    let novoEvento = {
+      id: "evt_" + Date.now(),
+      titulo: titulo,
+      tipo: tipo,
+      data: data,
+      local: local,
+      descricao: descricao,
+      confirmados: 0
+    };
+
+    let eventos = JSON.parse(localStorage.getItem("eventos_clube")) || [];
+    eventos.push(novoEvento);
+    localStorage.setItem("eventos_clube", JSON.stringify(eventos));
+
+    document.getElementById("formEvento").reset();
+    mostrarEventos();
+  }
+
+  function formatarDataHora(strData) {
+    if (!strData) return "";
+    let d = new Date(strData);
+    if (isNaN(d.getTime())) return strData;
+    let dia = String(d.getDate()).padStart(2, '0');
+    let mes = String(d.getMonth() + 1).padStart(2, '0');
+    let ano = d.getFullYear();
+    let hora = String(d.getHours()).padStart(2, '0');
+    let min = String(d.getMinutes()).padStart(2, '0');
+    return `${dia}/${mes}/${ano} às ${hora}:${min}h`;
+  }
+
+  function togglePresenca(idEvento) {
+    let confirmacoes = JSON.parse(localStorage.getItem("presencas_confirmadas")) || {};
+    let eventos = JSON.parse(localStorage.getItem("eventos_clube")) || [];
+
+    let index = eventos.findIndex(e => e.id === idEvento);
+    if (index === -1) return;
+
+    if (confirmacoes[idEvento]) {
+      confirmacoes[idEvento] = false;
+      eventos[index].confirmados = Math.max(0, (eventos[index].confirmados || 1) - 1);
+    } else {
+      confirmacoes[idEvento] = true;
+      eventos[index].confirmados = (eventos[index].confirmados || 0) + 1;
+    }
+
+    localStorage.setItem("presencas_confirmadas", JSON.stringify(confirmacoes));
+    localStorage.setItem("eventos_clube", JSON.stringify(eventos));
+    mostrarEventos();
+  }
+
+  function excluirEvento(idEvento) {
+    if (!confirm("Tem certeza que deseja excluir este evento?")) return;
+
+    let eventos = JSON.parse(localStorage.getItem("eventos_clube")) || [];
+    eventos = eventos.filter(e => e.id !== idEvento);
+    localStorage.setItem("eventos_clube", JSON.stringify(eventos));
+    mostrarEventos();
+  }
+
+  function mostrarEventos() {
+    let lista = document.getElementById("listaEventos");
+    let filtro = document.getElementById("filtroTipo").value;
+    let eventos = JSON.parse(localStorage.getItem("eventos_clube")) || [];
+    let confirmacoes = JSON.parse(localStorage.getItem("presencas_confirmadas")) || {};
+
+    // Ordenar por data
+    eventos.sort((a, b) => new Date(a.data) - new Date(b.data));
+
+    // Filtrar
+    if (filtro !== "todos") {
+      eventos = eventos.filter(e => e.tipo === filtro);
+    }
+
+    if (eventos.length === 0) {
+      lista.innerHTML = '<p class="sem-eventos">Nenhum evento encontrado para esta categoria.</p>';
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    eventos.forEach(function(evento) {
+      let isConfirmado = !!confirmacoes[evento.id];
+      let badgeClass = "badge-" + (evento.tipo || "Encontro");
+
+      let div = document.createElement("div");
+      div.className = "evento-item";
+
+      div.innerHTML = `
+        <span class="badge-tipo ${badgeClass}">${evento.tipo}</span>
+        <div class="evento-header">
+          <h4 class="evento-titulo">${evento.titulo}</h4>
+          <button onclick="excluirEvento('${evento.id}')" class="btn-excluir">Excluir</button>
+        </div>
+        <div class="evento-meta">
+          📍 Local: ${evento.local} | 🕒 ${formatarDataHora(evento.data)}
+        </div>
+        <p class="evento-desc">${evento.descricao || "Sem descrição informada."}</p>
+        <div class="evento-actions">
+          <span class="presenca-status">👥 Presenças confirmadas: <strong>${evento.confirmados || 0}</strong></span>
+          <button onclick="togglePresenca('${evento.id}')" class="${isConfirmado ? 'btn-confirmado' : 'btn-presenca'}">
+            ${isConfirmado ? '✔ Presença Confirmada' : '✋ Confirmar Presença'}
+          </button>
+        </div>
+      `;
+
+      lista.appendChild(div);
+    });
+  }
+
+  window.onload = function() {
+    inicializarEventos();
+    mostrarEventos();
+  };
+</script>
+
+</body>
+</html>

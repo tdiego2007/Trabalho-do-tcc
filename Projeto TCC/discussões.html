@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Discussões</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f1e9;
+    }
+
+    header{
+      background:#5c3d2e;
+      color:white;
+      padding:15px;
+      text-align:center;
+    }
+
+    nav{
+      background:#8b5e3c;
+      padding:10px;
+      text-align:center;
+    }
+
+    nav a{
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .container{
+      padding:30px;
+      max-width:600px;
+      margin:auto;
+    }
+
+    textarea{
+      width:100%;
+      height:80px;
+      padding:10px;
+      border-radius:5px;
+      border:1px solid #ccc;
+      resize:none;
+    }
+
+    button{
+      margin-top:10px;
+      background:#5c3d2e;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#7a5238;
+    }
+
+    .comentario{
+      background:white;
+      padding:10px;
+      border-radius:5px;
+      margin-top:15px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .excluir{
+      background:red;
+      margin-top:5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>💬 Espaço de Discussões</h2>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="livros.html">Livros</a>
+</nav>
+
+<div class="container">
+
+  <h3>Deixe sua opinião</h3>
+
+  <textarea id="comentarioInput" placeholder="Escreva seu comentário..."></textarea>
+  <button onclick="adicionarComentario()">Enviar</button>
+
+  <div id="listaComentarios"></div>
+
+</div>
+
+<script>
+
+  function adicionarComentario(){
+    let input = document.getElementById("comentarioInput");
+    let texto = input.value.trim();
+
+    if(texto === "") return;
+
+    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+    comentarios.push(texto);
+
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+
+    input.value = "";
+    mostrarComentarios();
+  }
+
+  function mostrarComentarios(){
+    let lista = document.getElementById("listaComentarios");
+    lista.innerHTML = "";
+
+    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+
+    comentarios.forEach(function(comentario, index){
+
+      let div = document.createElement("div");
+      div.className = "comentario";
+
+      let texto = document.createElement("p");
+      texto.innerText = comentario;
+
+      let botao = document.createElement("button");
+      botao.innerText = "Excluir";
+      botao.className = "excluir";
+      botao.onclick = function(){
+        excluirComentario(index);
+      };
+
+      div.appendChild(texto);
+      div.appendChild(botao);
+
+      lista.appendChild(div);
+
+    });
+  }
+
+  function excluirComentario(index){
+    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+    comentarios.splice(index, 1);
+
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+    mostrarComentarios();
+  }
+
+  // carregar ao abrir
+  window.onload = mostrarComentarios;
+
+</script>
+
+</body>
+</html>

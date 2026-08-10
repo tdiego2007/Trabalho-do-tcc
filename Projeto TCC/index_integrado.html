@@ -1,0 +1,471 @@
+Index:
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Clube do Livro IFRN</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background-color:#f5f1e9;
+    }
+
+    header{
+      background-color:#5c3d2e;
+      color:#fff;
+      padding:15px;
+      text-align:center;
+    }
+
+    nav{
+      background-color:#8b5e3c;
+      padding:10px;
+      text-align:center;
+    }
+
+    nav a{
+      color:white;
+      margin:0 8px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    nav a:hover{
+      text-decoration:underline;
+    }
+
+    .conteudo{
+      padding:50px;
+      text-align:center;
+    }
+
+    h1{
+      color:#5c3d2e;
+    }
+
+    .botoes{
+      margin-top:20px;
+    }
+
+    .btn{
+      background-color:#5c3d2e;
+      color:white;
+      padding:10px 18px;
+      margin:6px;
+      border-radius:5px;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .btn:hover{
+      background-color:#7a5238;
+    }
+
+    footer{
+      background:#5c3d2e;
+      color:white;
+      text-align:center;
+      padding:15px;
+      margin-top:50px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>Clube do Livro IFRN</h2>
+  <p>Leitura e troca de ideias</p>
+</header>
+
+<nav>
+
+  <a href="livros.html">Livros</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="cadastro.html">Cadastre-se</a>
+  <a href="login.html">Entrar</a>
+</nav>
+
+<div class="conteudo">
+  <h1>Bem-vindo</h1>
+
+  <p>
+    Esse site foi desenvolvido como parte de um projeto com o objetivo de incentivar
+    o hábito da leitura entre os estudantes do IFRN, utilizando recursos digitais
+    e interação.
+  </p>
+
+  <div class="botoes">
+    
+    <a href="livros.html" class="btn">Ver livros</a>
+    <a href="discusao.html" class="btn">Discussões</a>
+  </div>
+</div>
+
+<footer>
+  <p>Projeto acadêmico - IFRN</p>
+</footer>
+
+</body>
+</html>
+
+
+
+
+Livros:
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Livros do Mês</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f1e9;
+    }
+
+    header{
+      background:#5c3d2e;
+      color:white;
+      padding:15px;
+      text-align:center;
+    }
+
+    nav{
+      background:#8b5e3c;
+      padding:10px;
+      text-align:center;
+    }
+
+    nav a{
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .container{
+      padding:30px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      width:220px;
+      border-radius:8px;
+      padding:15px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+      border-radius:5px;
+    }
+
+    h3{
+      margin:10px 0 5px;
+    }
+
+    p{
+      font-size:14px;
+    }
+
+    button{
+      background:#5c3d2e;
+      color:white;
+      border:none;
+      padding:8px 10px;
+      margin-top:5px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#7a5238;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+    }
+
+    .popup-content{
+      background:white;
+      padding:20px;
+      border-radius:8px;
+      width:300px;
+      text-align:center;
+    }
+
+    .fechar{
+      margin-top:10px;
+      background:red;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>📚 Livros do Mês</h2>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="discusao.html">Discussões</a>
+</nav>
+
+<div class="container">
+
+  <!-- Livro 1 -->
+  <div class="card">
+    <img src="imagens/cidade de papel.jpg" alt="Livro">
+    <h3>Cidades de papel</h3>
+    <p>John Green</p>
+    <button onclick="verDetalhes('Quentin se apaixona por Margo, que desaparece deixando pistas. Ele parte em busca dela e descobre que a idealizava.')">Detalhes</button>
+    <button data-id="livro1" onclick="queroLer(this, 'livro1')">Quero ler</button>
+  </div>
+
+  <!-- Livro 2 -->
+  <div class="card">
+    <img src="imagens/capitaes da areia.jpg" alt="Livro">
+    <h3>Capitães da Areia</h3>
+    <p>Jorge Amado</p>
+    <button onclick="verDetalhes('Grupo de meninos de rua em Salvador luta para sobreviver enfrentando preconceito e dificuldades.')">Detalhes</button>
+    <button data-id="livro2" onclick="queroLer(this, 'livro2')">Quero ler</button>
+  </div>
+
+  <!-- Livro 3 -->
+  <div class="card">
+    <img src="imagens/1984.jpg" alt="Livro">
+    <h3>1984</h3>
+    <p>George Orwell</p>
+    <button onclick="verDetalhes('Winston vive em um regime totalitário onde tudo é controlado e tenta se rebelar.')">Detalhes</button>
+    <button data-id="livro3" onclick="queroLer(this, 'livro3')">Quero ler</button>
+  </div>
+
+</div>
+
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <p id="descricao"></p>
+    <button class="fechar" onclick="fecharPopup()">Fechar</button>
+  </div>
+</div>
+
+<script>
+
+  function verDetalhes(descricao){
+    document.getElementById("descricao").innerText = descricao;
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function fecharPopup(){
+    document.getElementById("popup").style.display = "none";
+  }
+
+  // BOTÃO COM TOGGLE
+  function queroLer(botao, idLivro){
+
+    let estado = localStorage.getItem(idLivro);
+
+    if(estado === "lido"){
+      botao.innerText = "Quero ler";
+      botao.style.background = "#5c3d2e";
+      localStorage.setItem(idLivro, "quero");
+    } else {
+      botao.innerText = "Lido ✔";
+      botao.style.background = "green";
+      localStorage.setItem(idLivro, "lido");
+    }
+  }
+
+  // CARREGAR ESTADO SALVO
+  window.onload = function(){
+
+    const livros = ["livro1", "livro2", "livro3"];
+
+    livros.forEach(function(id){
+
+      let botao = document.querySelector(`[data-id="${id}"]`);
+      let estado = localStorage.getItem(id);
+
+      if(botao){
+        if(estado === "lido"){
+          botao.innerText = "Lido ✔";
+          botao.style.background = "green";
+        } else {
+          botao.innerText = "Quero ler";
+          botao.style.background = "#5c3d2e";
+        }
+      }
+
+    });
+
+  }
+
+</script>
+
+</body>
+</html>
+
+
+
+Agendas:
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Agenda do Clube</title>
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f1e9;
+    }
+    header{
+      background:#5c3d2e;
+      color:white;
+      padding:15px;
+      text-align:center;
+    }
+    nav{
+      background:#8b5e3c;
+      padding:10px;
+      text-align:center;
+    }
+    nav a{
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      padding:30px;
+    }
+    input, select{
+      width:100%;
+      padding:10px;
+      margin:5px 0;
+      border-radius:5px;
+      border:1px solid #ccc;
+    }
+    button{
+      background:#5c3d2e;
+      color:white;
+      border:none;
+      padding:10px;
+      border-radius:5px;
+      cursor:pointer;
+      margin-top:5px;
+    }
+    button:hover{
+      background:#7a5238;
+    }
+    .evento{
+      background:white;
+      padding:10px;
+      margin-top:15px;
+      border-radius:5px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    }
+    .excluir{
+      background:red;
+      margin-top:5px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h2>📅 Agenda do Clube do Livro</h2>
+</header>
+<nav>
+  <a href="index.html">Início</a>
+  <a href="livros.html">Livros</a>
+  <a href="discussao.html">Discussões</a>
+</nav>
+<div class="container">
+  <h3>Adicionar evento</h3>
+  <input type="date" id="data">
+  
+  <select id="tipo">
+    <option value="">Tipo de evento</option>
+    <option>Roda de leitura</option>
+    <option>Sarau</option>
+    <option>Debate</option>
+  </select>
+  <input type="text" id="descricao" placeholder="Descrição do evento">
+  <button onclick="adicionarEvento()">Adicionar</button>
+  <h3>Próximos encontros</h3>
+  <div id="listaEventos"></div>
+</div>
+<script>
+  function adicionarEvento(){
+    let data = document.getElementById("data").value;
+    let tipo = document.getElementById("tipo").value;
+    let descricao = document.getElementById("descricao").value;
+    if(data === "" || tipo === "" || descricao === "") return;
+    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+    eventos.push({data, tipo, descricao});
+    localStorage.setItem("eventos", JSON.stringify(eventos));
+    document.getElementById("data").value = "";
+    document.getElementById("tipo").value = "";
+    document.getElementById("descricao").value = "";
+    mostrarEventos();
+  }
+  function mostrarEventos(){
+    let lista = document.getElementById("listaEventos");
+    lista.innerHTML = "";
+    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+    // ordenar por data
+    eventos.sort((a, b) => new Date(a.data) - new Date(b.data));
+    eventos.forEach(function(evento, index){
+      let div = document.createElement("div");
+      div.className = "evento";
+      let texto = document.createElement("p");
+      texto.innerHTML = 
+        "<strong>" + evento.tipo + "</strong><br>" +
+        "Data: " + evento.data + "<br>" +
+        evento.descricao;
+      let botao = document.createElement("button");
+      botao.innerText = "Excluir";
+      botao.className = "excluir";
+      botao.onclick = function(){
+        excluirEvento(index);
+      };
+      div.appendChild(texto);
+      div.appendChild(botao);
+      lista.appendChild(div);
+    });
+  }
+  function excluirEvento(index){
+    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+    eventos.splice(index, 1);
+    localStorage.setItem("eventos", JSON.stringify(eventos));
+    mostrarEventos();
+  }
+  window.onload = mostrarEventos;
+</script>
+</body>
+</html>

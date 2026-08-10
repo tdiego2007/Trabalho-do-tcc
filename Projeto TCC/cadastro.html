@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro - Clube do Livro IFRN</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f1e9;}
+header{background:#5c3d2e;color:#fff;padding:15px;text-align:center;}
+nav{background:#8b5e3c;padding:10px;text-align:center;}
+nav a{color:#fff;text-decoration:none;margin:0 10px;font-weight:bold;}
+.container{max-width:500px;margin:30px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+input{width:100%;padding:10px;margin:6px 0;border:1px solid #ccc;border-radius:5px;box-sizing:border-box;}
+label{font-size:14px}
+button{width:100%;padding:10px;background:#5c3d2e;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+button:hover{background:#7a5238;}
+.msg{text-align:center;margin-top:10px;color:green;}
+</style>
+</head>
+<body>
+<header><h2>Clube do Livro IFRN</h2></header>
+<nav><a href="index.html">Início</a> <a href="login.html">Login</a></nav>
+<div class="container">
+<h3>Cadastro de Aluno</h3>
+<input id="nome" placeholder="Nome completo">
+<input id="matricula" placeholder="Matrícula">
+<input id="email" type="email" placeholder="E-mail institucional">
+<input id="curso" placeholder="Curso">
+<input id="turma" placeholder="Turma">
+<input id="senha" type="password" placeholder="Senha">
+<input id="confirmar" type="password" placeholder="Confirmar senha">
+<label><input id="termos" type="checkbox"> Aceito os termos de uso</label><br><br>
+<button onclick="cadastrar()">Cadastrar</button>
+<p style="text-align:center"><a href="login.html">Já possui uma conta? Entrar</a></p>
+<p class="msg" id="msg"></p>
+</div>
+<script>
+function cadastrar(){
+let u={
+nome:nome.value,matricula:matricula.value,email:email.value,
+curso:curso.value,turma:turma.value,senha:senha.value};
+if(Object.values(u).some(v=>!v)){alert("Preencha todos os campos.");return;}
+if(senha.value!==confirmar.value){alert("As senhas não coincidem.");return;}
+if(!termos.checked){alert("Aceite os termos.");return;}
+let usuarios=JSON.parse(localStorage.getItem("usuarios"))||[];
+if(usuarios.some(x=>x.matricula===u.matricula)){alert("Matrícula já cadastrada.");return;}
+usuarios.push(u);
+localStorage.setItem("usuarios",JSON.stringify(usuarios));
+msg.innerText="Cadastro realizado!";
+setTimeout(()=>location.href="login.html",1200);
+}
+</script>
+</body></html>
