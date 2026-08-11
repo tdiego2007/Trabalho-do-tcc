@@ -4,73 +4,7 @@ Index:
 <head>
   <meta charset="UTF-8">
   <title>Clube do Livro IFRN</title>
-
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background-color:#f5f1e9;
-    }
-
-    header{
-      background-color:#5c3d2e;
-      color:#fff;
-      padding:15px;
-      text-align:center;
-    }
-
-    nav{
-      background-color:#8b5e3c;
-      padding:10px;
-      text-align:center;
-    }
-
-    nav a{
-      color:white;
-      margin:0 8px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
-    nav a:hover{
-      text-decoration:underline;
-    }
-
-    .conteudo{
-      padding:50px;
-      text-align:center;
-    }
-
-    h1{
-      color:#5c3d2e;
-    }
-
-    .botoes{
-      margin-top:20px;
-    }
-
-    .btn{
-      background-color:#5c3d2e;
-      color:white;
-      padding:10px 18px;
-      margin:6px;
-      border-radius:5px;
-      text-decoration:none;
-      display:inline-block;
-    }
-
-    .btn:hover{
-      background-color:#7a5238;
-    }
-
-    footer{
-      background:#5c3d2e;
-      color:white;
-      text-align:center;
-      padding:15px;
-      margin-top:50px;
-    }
-  </style>
+  <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
@@ -78,25 +12,34 @@ Index:
 <header>
   <h2>Clube do Livro IFRN</h2>
   <p>Leitura e troca de ideias</p>
+  <a href="perfil_do_aluno.html" class="perfil-topo">
+    👤 Meu Perfil
+  </a>
 </header>
 
 <nav>
 
   <a href="livros(1).html">Livros</a>
   <a href="agenda.html">Agenda</a>
+  <a href="discussoes.html">Discussões</a>
   <a href="cadastro.html">Cadastro</a>
   <a href="login.html">login</a>
+
   
 </nav>
 
 <div class="conteudo">
-  <h1>Bem-vindo</h1>
+  <h1 class="Bm-V">Bem-vindo</h1>
 
   <p>
     Esse site foi desenvolvido como parte de um projeto com o objetivo de incentivar
     o hábito da leitura entre os estudantes do IFRN, utilizando recursos digitais
     e interação.
   </p>
+
+  <div class="conteudo">
+    <img src="imagens/high-angle-people-reading-together(1).jpg" alt="imagem">
+  </div>
 
   <div class="botoes">
     
@@ -112,170 +55,6 @@ Index:
 </body>
 </html>
 
-
-
-
-Discussões: 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Discussões</title>
-
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f5f1e9;
-    }
-
-    header{
-      background:#5c3d2e;
-      color:white;
-      padding:15px;
-      text-align:center;
-    }
-
-    nav{
-      background:#8b5e3c;
-      padding:10px;
-      text-align:center;
-    }
-
-    nav a{
-      color:white;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
-    .container{
-      padding:30px;
-      max-width:600px;
-      margin:auto;
-    }
-
-    textarea{
-      width:100%;
-      height:80px;
-      padding:10px;
-      border-radius:5px;
-      border:1px solid #ccc;
-      resize:none;
-    }
-
-    button{
-      margin-top:10px;
-      background:#5c3d2e;
-      color:white;
-      border:none;
-      padding:10px 15px;
-      border-radius:5px;
-      cursor:pointer;
-    }
-
-    button:hover{
-      background:#7a5238;
-    }
-
-    .comentario{
-      background:white;
-      padding:10px;
-      border-radius:5px;
-      margin-top:15px;
-      box-shadow:0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .excluir{
-      background:red;
-      margin-top:5px;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h2>💬 Espaço de Discussões</h2>
-</header>
-
-<nav>
-  <a href="index.html">Início</a>
-  <a href="livros.html">Livros</a>
-</nav>
-
-<div class="container">
-
-  <h3>Deixe sua opinião</h3>
-
-  <textarea id="comentarioInput" placeholder="Escreva seu comentário..."></textarea>
-  <button onclick="adicionarComentario()">Enviar</button>
-
-  <div id="listaComentarios"></div>
-
-</div>
-
-<script>
-
-  function adicionarComentario(){
-    let input = document.getElementById("comentarioInput");
-    let texto = input.value.trim();
-
-    if(texto === "") return;
-
-    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
-    comentarios.push(texto);
-
-    localStorage.setItem("comentarios", JSON.stringify(comentarios));
-
-    input.value = "";
-    mostrarComentarios();
-  }
-
-  function mostrarComentarios(){
-    let lista = document.getElementById("listaComentarios");
-    lista.innerHTML = "";
-
-    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
-
-    comentarios.forEach(function(comentario, index){
-
-      let div = document.createElement("div");
-      div.className = "comentario";
-
-      let texto = document.createElement("p");
-      texto.innerText = comentario;
-
-      let botao = document.createElement("button");
-      botao.innerText = "Excluir";
-      botao.className = "excluir";
-      botao.onclick = function(){
-        excluirComentario(index);
-      };
-
-      div.appendChild(texto);
-      div.appendChild(botao);
-
-      lista.appendChild(div);
-
-    });
-  }
-
-  function excluirComentario(index){
-    let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
-    comentarios.splice(index, 1);
-
-    localStorage.setItem("comentarios", JSON.stringify(comentarios));
-    mostrarComentarios();
-  }
-
-  // carregar ao abrir
-  window.onload = mostrarComentarios;
-
-</script>
-
-</body>
-</html>
 
 
 Livros:
@@ -401,7 +180,7 @@ Livros:
 
   <!-- Livro 1 -->
   <div class="card">
-    <img src="cidade de papel.jpg" alt="Livro">
+    <img src="imagens/cidade de papel.jpg" alt="Livro">
     <h3>Cidades de papel</h3>
     <p>John Green</p>
     <button onclick="verDetalhes('Quentin se apaixona por Margo, que desaparece deixando pistas. Ele parte em busca dela e descobre que a idealizava.')">Detalhes</button>
@@ -410,7 +189,7 @@ Livros:
 
   <!-- Livro 2 -->
   <div class="card">
-    <img src="capitaes da areia.jpg" alt="Livro">
+    <img src="imagens/capitaes da areia.jpg" alt="Livro">
     <h3>Capitães da Areia</h3>
     <p>Jorge Amado</p>
     <button onclick="verDetalhes('Grupo de meninos de rua em Salvador luta para sobreviver enfrentando preconceito e dificuldades.')">Detalhes</button>
@@ -419,7 +198,7 @@ Livros:
 
   <!-- Livro 3 -->
   <div class="card">
-    <img src="1984.jpg" alt="Livro">
+    <img src="imagens/1984.jpg" alt="Livro">
     <h3>1984</h3>
     <p>George Orwell</p>
     <button onclick="verDetalhes('Winston vive em um regime totalitário onde tudo é controlado e tenta se rebelar.')">Detalhes</button>
@@ -489,147 +268,5 @@ Livros:
 
 </script>
 
-</body>
-</html>
-
-
-
-Agendas:
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Agenda do Clube</title>
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f5f1e9;
-    }
-    header{
-      background:#5c3d2e;
-      color:white;
-      padding:15px;
-      text-align:center;
-    }
-    nav{
-      background:#8b5e3c;
-      padding:10px;
-      text-align:center;
-    }
-    nav a{
-      color:white;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-    }
-    .container{
-      max-width:700px;
-      margin:auto;
-      padding:30px;
-    }
-    input, select{
-      width:100%;
-      padding:10px;
-      margin:5px 0;
-      border-radius:5px;
-      border:1px solid #ccc;
-    }
-    button{
-      background:#5c3d2e;
-      color:white;
-      border:none;
-      padding:10px;
-      border-radius:5px;
-      cursor:pointer;
-      margin-top:5px;
-    }
-    button:hover{
-      background:#7a5238;
-    }
-    .evento{
-      background:white;
-      padding:10px;
-      margin-top:15px;
-      border-radius:5px;
-      box-shadow:0 2px 4px rgba(0,0,0,0.1);
-    }
-    .excluir{
-      background:red;
-      margin-top:5px;
-    }
-  </style>
-</head>
-<body>
-<header>
-  <h2>📅 Agenda do Clube do Livro</h2>
-</header>
-<nav>
-  <a href="index.html">Início</a>
-  <a href="livros.html">Livros</a>
-  <a href="discussao.html">Discussões</a>
-</nav>
-<div class="container">
-  <h3>Adicionar evento</h3>
-  <input type="date" id="data">
-  
-  <select id="tipo">
-    <option value="">Tipo de evento</option>
-    <option>Roda de leitura</option>
-    <option>Sarau</option>
-    <option>Debate</option>
-  </select>
-  <input type="text" id="descricao" placeholder="Descrição do evento">
-  <button onclick="adicionarEvento()">Adicionar</button>
-  <h3>Próximos encontros</h3>
-  <div id="listaEventos"></div>
-</div>
-<script>
-  function adicionarEvento(){
-    let data = document.getElementById("data").value;
-    let tipo = document.getElementById("tipo").value;
-    let descricao = document.getElementById("descricao").value;
-    if(data === "" || tipo === "" || descricao === "") return;
-    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
-    eventos.push({data, tipo, descricao});
-    localStorage.setItem("eventos", JSON.stringify(eventos));
-    document.getElementById("data").value = "";
-    document.getElementById("tipo").value = "";
-    document.getElementById("descricao").value = "";
-    mostrarEventos();
-  }
-  function mostrarEventos(){
-    let lista = document.getElementById("listaEventos");
-    lista.innerHTML = "";
-    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
-    // ordenar por data
-    eventos.sort((a, b) => new Date(a.data) - new Date(b.data));
-    eventos.forEach(function(evento, index){
-      let div = document.createElement("div");
-      div.className = "evento";
-      let texto = document.createElement("p");
-      texto.innerHTML = 
-        "<strong>" + evento.tipo + "</strong><br>" +
-        "Data: " + evento.data + "<br>" +
-        evento.descricao;
-      let botao = document.createElement("button");
-      botao.innerText = "Excluir";
-      botao.className = "excluir";
-      botao.onclick = function(){
-        excluirEvento(index);
-      };
-      div.appendChild(texto);
-      div.appendChild(botao);
-      lista.appendChild(div);
-    });
-  }
-  function excluirEvento(index){
-    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
-    eventos.splice(index, 1);
-    localStorage.setItem("eventos", JSON.stringify(eventos));
-    mostrarEventos();
-  }
-  window.onload = mostrarEventos;
-</script>
 </body>
 </html>

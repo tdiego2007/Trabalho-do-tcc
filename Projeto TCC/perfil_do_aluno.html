@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil do Aluno - Clube do Livro IFRN</title>
+
+  <style>
+    /* Estilização Geral e Paleta de Cores Padronizada */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f1e9;
+      color: #333333;
+    }
+
+    header {
+      background-color: #5c3d2e;
+      color: #ffffff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    nav {
+      background-color: #8b5e3c;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    /* Container Principal */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Card do Perfil do Aluno */
+    .profile-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      margin-bottom: 25px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #5c3d2e;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h1 {
+      color: #5c3d2e;
+      margin: 0 0 8px 0;
+      font-size: 24px;
+    }
+
+    .profile-info p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #555555;
+    }
+
+    /* Botões Padrão */
+    .btn {
+      background-color: #5c3d2e;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #7a5238;
+    }
+
+    /* Navegação Interna por Abas */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid #8b5e3c;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      background: #8b5e3c;
+      color: white;
+      border: none;
+      border-radius: 5px 5px 0 0;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .tab-btn.active {
+      background: #5c3d2e;
+    }
+
+    /* Conteúdo das Abas */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Card de Metas e Progresso */
+    .goal-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .goal-card h3 {
+      color: #5c3d2e;
+      margin-top: 0;
+    }
+
+    .progress-bar-container {
+      background: #e0e0e0;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-fill {
+      background: #27ae60;
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    /* Grid de Livros (Padronizado com Livros do Mês) */
+    .container-livros {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    .card-livro {
+      background: white;
+      width: 220px;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+
+    .card-livro img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .card-livro h4 {
+      color: #5c3d2e;
+      margin: 10px 0 5px;
+    }
+
+    .card-livro p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+
+    /* Cards de Eventos */
+    .event-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #5c3d2e;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .event-item h4 {
+      color: #5c3d2e;
+      margin: 0 0 6px 0;
+    }
+
+    .event-item p {
+      margin: 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Modal / Popup de Edição */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      width: 320px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-content h3 {
+      color: #5c3d2e;
+      margin-top: 0;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #5c3d2e;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-border-box;
+    }
+
+    .btn-fechar {
+      background: red;
+      margin-left: 5px;
+    }
+
+    footer {
+      background: #5c3d2e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>Clube do Livro IFRN</h2>
+  <p>Perfil do Aluno</p>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="livros(1).html">Livros</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="discusao.html">Discussões</a>
+  <a href="perfil.html" class="active">Perfil</a>
+</nav>
+
+<div class="container">
+
+  <!-- Card do Perfil -->
+  <div class="profile-card">
+    <div class="avatar" id="avatarBox">A</div>
+    <div class="profile-info">
+      <h1 id="nomeAluno">Carregando...</h1>
+      <p id="cursoTurma">Curso: - | Turma: -</p>
+      <p id="matricula">Matrícula: -</p>
+      <p id="email">E-mail: -</p>
+    </div>
+    <button class="btn" onclick="openPopup()">✏️ Editar Perfil</button>
+  </div>
+
+  <!-- Navegação Interna do Perfil -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab(event, 'metas')">📊 Metas & Progresso</button>
+    <button class="tab-btn" onclick="switchTab(event, 'lidos')">📚 Livros Lidos</button>
+    <button class="tab-btn" onclick="switchTab(event, 'favoritos')">❤️ Favoritos</button>
+    <button class="tab-btn" onclick="switchTab(event, 'eventos')">📅 Eventos Inscritos</button>
+  </div>
+
+  <!-- Aba 1: Metas -->
+  <div id="tab-metas" class="tab-content active">
+    <div class="goal-card">
+      <h3>Meta de Leitura Anual</h3>
+      <p id="goalText">0 de 0 livros lidos</p>
+      <div class="progress-bar-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aba 2: Livros Lidos -->
+  <div id="tab-lidos" class="tab-content">
+    <div class="container-livros" id="gridLidos"></div>
+  </div>
+
+  <!-- Aba 3: Favoritos -->
+  <div id="tab-favoritos" class="tab-content">
+    <div class="container-livros" id="gridFavoritos"></div>
+  </div>
+
+  <!-- Aba 4: Eventos -->
+  <div id="tab-eventos" class="tab-content">
+    <div id="listEventos"></div>
+  </div>
+
+</div>
+
+<!-- Modal / Popup Editar Perfil -->
+<div class="popup" id="editPopup">
+  <div class="popup-content">
+    <h3>Editar Perfil</h3>
+    <form id="editForm" onsubmit="saveProfile(event)">
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="text" id="editNome" required>
+      </div>
+      <div class="form-group">
+        <label>URL da Foto de Perfil</label>
+        <input type="url" id="editFoto">
+      </div>
+      <div class="form-group">
+        <label>Nova Senha</label>
+        <input type="password" id="editSenha" placeholder="Opcional">
+      </div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button type="submit" class="btn">Salvar</button>
+        <button type="button" class="btn btn-fechar" onclick="closePopup()">Fechar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>Projeto acadêmico - IFRN</p>
+</footer>
+
+<script>
+  // Dados Simulados do Aluno
+  let perfilData = {
+    aluno: {
+      nome_completo: "Ana Clara Silva",
+      curso: "Informática",
+      turma: "3º Ano A",
+      matricula: "2026123456",
+      email_inst: "ana.silva@aluno.if.edu.br",
+      foto_url: ""
+    },
+    estatisticas: { totalLidos: 8, metaObjetivo: 12, progressoPercentual: 67 },
+    livrosLidos: [
+      { id: 1, titulo: "Cidades de Papel", autor: "John Green", capa: "cidade de papel.jpg" },
+      { id: 2, titulo: "1984", autor: "George Orwell", capa: "1984.jpg" }
+    ],
+    livrosFavoritos: [
+      { id: 2, titulo: "1984", autor: "George Orwell", capa: "1984.jpg" }
+    ],
+    eventosInscritos: [
+      { id: 101, titulo: "Discussão: Livro do Mês", tipo: "Encontro", data: "15/08/2026 às 14:00", local: "Biblioteca Central" }
+    ]
+  };
+
+  // Troca de Abas
+  function switchTab(evt, tabName) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    evt.currentTarget.classList.add('active');
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+  }
+
+  // Controle do Popup
+  function openPopup() {
+    document.getElementById('editPopup').style.display = 'flex';
+  }
+
+  function closePopup() {
+    document.getElementById('editPopup').style.display = 'none';
+  }
+
+  // Renderizar Dados
+  function loadProfile() {
+    const data = perfilData;
+
+    document.getElementById('nomeAluno').innerText = data.aluno.nome_completo;
+    document.getElementById('cursoTurma').innerText = `Curso: ${data.aluno.curso} | Turma: ${data.aluno.turma}`;
+    document.getElementById('matricula').innerText = `Matrícula: ${data.aluno.matricula}`;
+    document.getElementById('email').innerText = `E-mail: ${data.aluno.email_inst}`;
+
+    const avatarBox = document.getElementById('avatarBox');
+    if (data.aluno.foto_url && data.aluno.foto_url.trim() !== '') {
+      avatarBox.innerHTML = `<img src="${data.aluno.foto_url}" alt="Foto">`;
+    } else {
+      avatarBox.innerText = data.aluno.nome_completo.charAt(0);
+    }
+
+    document.getElementById('editNome').value = data.aluno.nome_completo;
+    document.getElementById('editFoto').value = data.aluno.foto_url || '';
+
+    // Metas
+    document.getElementById('goalText').innerText = `${data.estatisticas.totalLidos} de ${data.estatisticas.metaObjetivo} livros lidos em 2026 (${data.estatisticas.progressoPercentual}%)`;
+    document.getElementById('progressFill').style.width = `${data.estatisticas.progressoPercentual}%`;
+
+    // Grid Livros Lidos
+    document.getElementById('gridLidos').innerHTML = data.livrosLidos.map(l => `
+      <div class="card-livro">
+        <img src="${l.capa}" alt="${l.titulo}">
+        <h4>${l.titulo}</h4>
+        <p>${l.autor}</p>
+      </div>
+    `).join('');
+
+    // Grid Favoritos
+    document.getElementById('gridFavoritos').innerHTML = data.livrosFavoritos.map(l => `
+      <div class="card-livro">
+        <img src="${l.capa}" alt="${l.titulo}">
+        <h4>${l.titulo}</h4>
+        <p>${l.autor}</p>
+      </div>
+    `).join('');
+
+    // Lista de Eventos
+    document.getElementById('listEventos').innerHTML = data.eventosInscritos.map(e => `
+      <div class="event-item">
+        <h4>${e.titulo} (${e.tipo})</h4>
+        <p>📅 ${e.data} | 📍 ${e.local}</p>
+      </div>
+    `).join('');
+  }
+
+  // Salvar Alterações no Modal
+  function saveProfile(e) {
+    e.preventDefault();
+    perfilData.aluno.nome_completo = document.getElementById('editNome').value;
+    perfilData.aluno.foto_url = document.getElementById('editFoto').value;
+
+    loadProfile();
+    closePopup();
+  }
+
+  window.onload = loadProfile;
+</script>
+
+</body>
+</html>

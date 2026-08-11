@@ -1,64 +1,481 @@
- body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background-color:#f5f1e9;
-    }
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background-color:#f5f1e9;
+}
 
-    header{
-      background-color:#5c3d2e;
-      color:#fff;
-      padding:15px;
-      text-align:center;
-    }
+header {
+  background-color: #5c3d2e; /* Mantém a cor original */
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  position: relative; /* Permite posicionar o botão do perfil em relação ao header */
+}
 
-    nav{
-      background-color:#8b5e3c;
-      padding:10px;
-      text-align:center;
-    }
+/* Novo estilo do botão de perfil no canto superior direito */
+.perfil-topo {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #8b5e3c; /* Cor de destaque padronizada */
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
 
-    nav a{
-      color:white;
-      margin:0 8px;
-      text-decoration:none;
-      font-weight:bold;
-    }
+.perfil-topo:hover {
+  background-color: #7a5238;
+}
+nav{
+  background-color:#8b5e3c;
+  padding:10px;
+  text-align:center;
+}
 
-    nav a:hover{
-      text-decoration:underline;
-    }
+nav a{
+  color:white;
+  margin:0 8px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .conteudo{
-      padding:50px;
-      text-align:center;
-    }
+nav a:hover{
+  text-decoration:underline;
+}
 
-    h1{
-      color:#5c3d2e;
-    }
+.conteudo{
+  padding:50px;
+  text-align:center;
+}
 
-    .botoes{
-      margin-top:20px;
-    }
+h1 {
+  color:#5c3d2e;
+}
 
-    .btn{
-      background-color:#5c3d2e;
-      color:white;
-      padding:10px 18px;
-      margin:6px;
-      border-radius:5px;
-      text-decoration:none;
-      display:inline-block;
-    }
+.botoes{
+  margin-top:20px;
+}
 
-    .btn:hover{
-      background-color:#7a5238;
-    }
+.btn{
+  background-color:#5c3d2e;
+  color:white;
+  padding:10px 18px;
+  margin:6px;
+  border-radius:5px;
+  text-decoration:none;
+  display:inline-block;
+}
 
-    footer{
-      background:#5c3d2e;
-      color:white;
-      text-align:center;
-      padding:15px;
-      margin-top:50px;
-    }
+.btn:hover{
+  background-color:#7a5238;
+}
+
+footer{
+  background:#5c3d2e;
+  color:white;
+  text-align:center;
+  padding:15px;
+  margin-top:50px;
+}
+
+.conteudo img{
+  max-width: 60%;
+  height: auto;
+}
+
+
+
+
+  /* estilo do livros(1)*/
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f5f1e9;
+  color:#3f3027;
+}
+
+header{
+  background:#5c3d2e;
+  color:white;
+  padding:18px 15px;
+  text-align:center;
+}
+
+header h2{
+  margin:0 0 5px;
+}
+
+header p{
+  margin:0;
+  opacity:.9;
+}
+
+nav{
+  background:#8b5e3c;
+  padding:10px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+nav a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:#f5e5d2;
+}
+
+.hero{
+  max-width:1050px;
+  margin:0 auto;
+  padding:45px 25px 25px;
+  text-align:center;
+}
+
+.hero .tag{
+  display:inline-block;
+  background:#e7d5c2;
+  color:#5c3d2e;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  color:#5c3d2e;
+  font-size:34px;
+  margin:5px 0 10px;
+}
+
+.hero p{
+  max-width:700px;
+  margin:0 auto;
+  line-height:1.6;
+  color:#66554b;
+}
+
+.controles{
+  max-width:1050px;
+  margin:15px auto 5px;
+  padding:0 25px;
+  display:flex;
+  justify-content:center;
+}
+
+.busca{
+  width:100%;
+  max-width:520px;
+  padding:12px 16px;
+  border:1px solid #d5c5b6;
+  border-radius:25px;
+  background:white;
+  outline:none;
+  font-size:15px;
+}
+
+.busca:focus{
+  border-color:#8b5e3c;
+  box-shadow:0 0 0 3px rgba(139,94,60,.12);
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 25px 55px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 3px 10px rgba(0,0,0,.13);
+  transition:transform .25s, box-shadow .25s;
+  display:flex;
+  flex-direction:column;
+  animation:entrar .45s ease both;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+
+.capa{
+  height:300px;
+  overflow:hidden;
+  background:#e8ded4;
+  position:relative;
+}
+
+.capa img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .35s;
+}
+
+.card:hover .capa img{
+  transform:scale(1.04);
+}
+
+.badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#5c3d2e;
+  color:white;
+  padding:6px 9px;
+  border-radius:15px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.info{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.info h3{
+  color:#5c3d2e;
+  margin:0 0 5px;
+  font-size:21px;
+}
+
+.autor{
+  margin:0 0 12px;
+  color:#8b5e3c;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.chamada{
+  font-size:14px;
+  line-height:1.5;
+  color:#5c3d2e;
+  margin:0 0 9px;
+  font-weight:600;
+}
+
+.chamada + .chamada{
+  color:#5f5149;
+  font-weight:normal;
+  line-height:1.55;
+  margin-bottom:15px;
+}
+
+.chamada{
+  font-size:14px;
+  line-height:1.55;
+  color:#5f5149;
+  margin:0 0 15px;
+  flex:1;
+}
+
+.acoes{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+button{
+  background:#5c3d2e;
+  color:white;
+  border:none;
+  padding:9px 12px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+}
+
+button:hover{
+  background:#7a5238;
+  transform:translateY(-1px);
+}
+
+button.lido{
+  background:#587044;
+}
+
+.vazio{
+  display:none;
+  text-align:center;
+  padding:30px;
+  color:#6d5c51;
+  grid-column:1/-1;
+}
+
+/* Popup */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(45,29,20,.68);
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:50;
+}
+
+.popup-content{
+  background:#fffaf5;
+  padding:28px;
+  border-radius:12px;
+  width:min(520px,100%);
+  max-height:85vh;
+  overflow:auto;
+  text-align:left;
+  box-shadow:0 10px 35px rgba(0,0,0,.3);
+  animation:aparecer .2s ease;
+}
+
+.popup-content h2{
+  color:#5c3d2e;
+  margin-top:0;
+}
+
+.popup-content p{
+  line-height:1.7;
+  color:#51433b;
+}
+
+.fechar{
+  background:#8b5e3c;
+  margin-top:8px;
+}
+
+footer{
+  background:#5c3d2e;
+  color:white;
+  text-align:center;
+  padding:15px;
+}
+
+footer p{
+  margin:0;
+}
+
+@keyframes entrar{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes aparecer{
+  from{opacity:0; transform:scale(.96);}
+  to{opacity:1; transform:scale(1);}
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:28px;
+  }
+
+  nav a{
+    margin:0 5px;
+    font-size:14px;
+  }
+
+  .capa{
+    height:280px;
+  }
+}
+
+/* estilo das discussões*/
+
+    body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#f5f1e9;
+}
+
+header{
+  background:#5c3d2e;
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+
+nav{
+  background:#8b5e3c;
+  padding:10px;
+  text-align:center;
+}
+
+nav a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.container{
+  padding:30px;
+  max-width:600px;
+  margin:auto;
+}
+
+textarea{
+  width:100%;
+  height:80px;
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+  resize:none;
+}
+
+button{
+  margin-top:10px;
+  background:#5c3d2e;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#7a5238;
+}
+
+.comentario{
+  background:white;
+  padding:10px;
+  border-radius:5px;
+  margin-top:15px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+.excluir{
+  background:red;
+  margin-top:5px;
+}
