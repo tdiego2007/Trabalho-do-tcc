@@ -19,8 +19,8 @@
 
 <nav>
   <a href="index.html">Início</a>
-  <a href="livros(1).html">Biblioteca</a>
-  <a href="agenda.html" class="active">Agenda</a>
+  <a href="livros(1).html" class="active">Biblioteca</a>
+  <a href="agenda.html">Agenda</a>
   <a href="discussoes.html">Discussões</a>
   <a href="cadastro.html">Cadastre-se</a>
   <a href="login.html">Entrar</a>
@@ -126,6 +126,72 @@
     </div>
   </article>
 
+  <article class="card" data-titulo="Grande Sertão: Veredas" data-autor="João Guimarães Rosa">
+    <div class="capa">
+      <img src="imagens/Grande Sertão Veredas.jpg" alt="Capa do livro Grande Sertão: Veredas">
+      <span class="badge">⚠️ Distopia</span>
+    </div>
+
+    <div class="info">
+      <h3>Grandes Sertão: Veredas</h3>
+      <p class="autor">João Guimarães Rosa</p>
+      <p class="chamada">⭐ "O correr da vida embrulha tudo, a vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem."</p>
+
+      <div class="acoes">
+        <button onclick="verDetalhes(
+          'Grande Sertão: Veredas',
+          'Ao narrar o mundo através dos olhos de Riobaldo, Guimarães Rosa constrói um romance fascinante, que mescla sofrimento, luta, alegria, violência, amor e morte em uma prosa extremamente inventiva. Neste clássico arrebatador, as paisagens percorridas pelos jagunços ganham uma dimensão universal e profundamente humana.'
+        )">Ver detalhes</button>
+
+        <button data-id="livro4" onclick="queroLer(this,'livro4')">Quero ler</button>
+      </div>
+    </div>
+  </article>
+
+    <article class="card" data-titulo="1984" data-autor="George Orwell">
+    <div class="capa">
+      <img src="imagens/A_HORA_DA_ESTRELA_3829512788B.jpg" alt="Capa do livro">
+      <span class="badge">⚠️ Distopia</span>
+    </div>
+
+    <div class="info">
+      <h3>A Hora da Estrela</h3>
+      <p class="autor">Clarice Lispector</p>
+      <p class="chamada">⭐ E se até os seus próprios pensamentos pudessem ser vigiados?</p>
+
+      <div class="acoes">
+        <button onclick="verDetalhes(
+          'A Hora da Estrela',
+          'Marta, uma jovem do interior do Brasil, se muda para o Rio de Janeiro e enfrenta as dificuldades da vida urbana. A obra explora temas como a identidade, o amor e a busca por significado.'
+        )">Ver detalhes</button>
+
+        <button data-id="livro5" onclick="queroLer(this,'livro5')">Quero ler</button>
+      </div>
+    </div>
+  </article>
+
+    <article class="card" data-titulo="Memórias postumas de Brás Cubas" data-autor="Machado de Assis">
+    <div class="capa">
+      <img src="imagens/memorias-postumas-de-bras-cubas-com-apresentacao-de-geovani-martins.jpg" alt="Capa do livro Memórias postumas de Brás Cubas">
+      <span class="badge">⚠️ Distopia</span>
+    </div>
+
+    <div class="info">
+      <h3>Memórias postumas de Brás Cubas</h3>
+      <p class="autor">Machado de Assis</p>
+      <p class="chamada">⭐ Eu não sou propriamente um autor defunto, mas um defunto autor</p>
+
+      <div class="acoes">
+        <button onclick="verDetalhes(
+          'Memórias postumas de Brás Cubas',
+          'Brás Cubas, após sua morte, relata sua vida e experiências. A obra é uma crítica à sociedade brasileira do século XIX e explora temas como o egoísmo, a hipocrisia e a busca pela identidade.'
+        )">Ver detalhes</button>
+
+        <button data-id="livro6" onclick="queroLer(this,'livro6')">Quero ler</button>
+      </div>
+    </div>
+  </article>
+
   <p class="vazio" id="vazio">Nenhum livro encontrado. Tente outro título ou autor.</p>
 
 </div>
@@ -174,7 +240,7 @@
   }
 
   function carregarEstados(){
-    const livros = ["livro1","livro2","livro3"];
+    const livros = ["livro1","livro2","livro3","livro4","livro5","livro6"];
 
     livros.forEach(function(id){
       const botao = document.querySelector(`[data-id="${id}"]`);
