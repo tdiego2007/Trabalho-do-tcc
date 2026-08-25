@@ -278,6 +278,12 @@ nav a:hover{
   font-weight:bold;
 }
 
+.autor:hover{
+  font-size:18px;
+  transition:0.1s;
+  color:#3ea328;
+}
+
 .chamada{
   font-size:14px;
   line-height:1.5;
@@ -299,6 +305,12 @@ nav a:hover{
   color:#5f5149;
   margin:0 0 15px;
   flex:1;
+}
+
+
+.chamada:hover {
+  transition: 0.1s;
+  font-size: 17px;
 }
 
 .acoes{
