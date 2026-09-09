@@ -1,0 +1,426 @@
+Index:
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Clube do Livro IFRN</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+<header>
+  <h2>Clube do Livro IFRN</h2>
+  <p>Leitura e troca de ideias</p>
+  <a href="perfil_do_aluno.html" class="perfil-topo">
+    👤 Meu Perfil
+  </a>
+</header>
+
+<nav>
+  <a href="index.html" class="active">Início</a>
+  <a href="livros(1).html">Biblioteca</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="discussoes.html">Discussões</a>
+  <a href="cadastro.html">Cadastro</a>
+  <a href="login.html">login</a>
+
+  
+</nav>
+
+<div class="conteudo">
+  <h1 class="Bm-V">Bem-vindo!</h1>
+
+  <p>
+    Esse site foi desenvolvido como parte de um projeto com o objetivo de incentivar
+    o hábito da leitura entre os estudantes do IFRN, utilizando recursos digitais
+    e interação.
+  </p>
+
+  <div class="conteudo">
+    <img src="imagens/high-angle-people-reading-together(1).jpg" alt="imagem">
+  </div>
+
+  <div class="botoes">
+    
+    <a href="livros(1).html" class="btn">Ver livros</a>
+    <a href="discussoes.html" class="btn">Discussões</a>
+  </div>
+</div>
+
+<footer>
+  <p>Projeto acadêmico - IFRN</p>
+</footer>
+
+</body>
+</html>
+
+
+
+Livros:
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Livros do Mês</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f1e9;
+    }
+
+    header{
+      background:#5c3d2e;
+      color:white;
+      padding:15px;
+      text-align:center;
+    }
+
+    nav{
+      background:#8b5e3c;
+      padding:10px;
+      text-align:center;
+    }
+
+    nav a{
+      color:white;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    .container{
+      padding:30px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      width:220px;
+      border-radius:8px;
+      padding:15px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+      border-radius:5px;
+    }
+
+    h3{
+      margin:10px 0 5px;
+    }
+
+    p{
+      font-size:14px;
+    }
+
+    button{
+      background:#5c3d2e;
+      color:white;
+      border:none;
+      padding:8px 10px;
+      margin-top:5px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#7a5238;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+    }
+
+    .popup-content{
+      background:white;
+      padding:20px;
+      border-radius:8px;
+      width:300px;
+      text-align:center;
+    }
+
+    .fechar{
+      margin-top:10px;
+      background:red;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>📚 Livros do Mês</h2>
+</header>
+
+<nav>
+  <a href="index.html" class="active">Início</a>
+  <a href="livros(1).html">Biblioteca</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="discussoes.html">Discussões</a>
+  <a href="cadastro.html">Cadastro</a>
+  <a href="login.html">login</a>
+</nav>
+
+<div class="container">
+
+  <!-- Livro 1 -->
+  <div class="card">
+    <img src="imagens/cidade de papel.jpg" alt="Livro">
+    <h3>Cidades de papel</h3>
+    <p>John Green</p>
+    <button onclick="verDetalhes('Quentin se apaixona por Margo, que desaparece deixando pistas. Ele parte em busca dela e descobre que a idealizava.')">Detalhes</button>
+    <button data-id="livro1" onclick="queroLer(this, 'livro1')">Quero ler</button>
+  </div>
+
+  <!-- Livro 2 -->
+  <div class="card">
+    <img src="imagens/capitaes da areia.jpg" alt="Livro">
+    <h3>Capitães da Areia</h3>
+    <p>Jorge Amado</p>
+    <button onclick="verDetalhes('Grupo de meninos de rua em Salvador luta para sobreviver enfrentando preconceito e dificuldades.')">Detalhes</button>
+    <button data-id="livro2" onclick="queroLer(this, 'livro2')">Quero ler</button>
+  </div>
+
+  <!-- Livro 3 -->
+  <div class="card">
+    <img src="imagens/1984.jpg" alt="Livro">
+    <h3>1984</h3>
+    <p>George Orwell</p>
+    <button onclick="verDetalhes('Winston vive em um regime totalitário onde tudo é controlado e tenta se rebelar.')">Detalhes</button>
+    <button data-id="livro3" onclick="queroLer(this, 'livro3')">Quero ler</button>
+  </div>
+
+</div>
+
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <p id="descricao"></p>
+    <button class="fechar" onclick="fecharPopup()">Fechar</button>
+  </div>
+</div>
+
+
+
+<script>
+
+  function verDetalhes(descricao){
+    document.getElementById("descricao").innerText = descricao;
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function fecharPopup(){
+    document.getElementById("popup").style.display = "none";
+  }
+
+  // BOTÃO COM TOGGLE
+  function queroLer(botao, idLivro){
+
+    let estado = localStorage.getItem(idLivro);
+
+    if(estado === "lido"){
+      botao.innerText = "Quero ler";
+      botao.style.background = "#5c3d2e";
+      localStorage.setItem(idLivro, "quero");
+    } else {
+      botao.innerText = "Lido ✔";
+      botao.style.background = "green";
+      localStorage.setItem(idLivro, "lido");
+    }
+  }
+
+  // CARREGAR ESTADO SALVO
+  window.onload = function(){
+
+    const livros = ["livro1", "livro2", "livro3"];
+
+    livros.forEach(function(id){
+
+      let botao = document.querySelector(`[data-id="${id}"]`);
+      let estado = localStorage.getItem(id);
+
+      if(botao){
+        if(estado === "lido"){
+          botao.innerText = "Lido ✔";
+          botao.style.background = "green";
+        } else {
+          botao.innerText = "Quero ler";
+          botao.style.background = "#5c3d2e";
+        }
+      }
+
+    });
+
+  }
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre o Clube - Clube do Livro IFRN</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f1e9;
+      color: #333333;
+    }
+
+    header {
+      background-color: #5c3d2e;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    nav {
+      background-color: #8b5e3c;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover, nav a.active {
+      text-decoration: underline;
+    }
+
+    .conteudo {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #5c3d2e;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #5c3d2e;
+      margin-top: 25px;
+      border-bottom: 2px solid #f5f1e9;
+      padding-bottom: 5px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555555;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      margin: 10px 0 20px 20px;
+      color: #555555;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #5c3d2e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>Clube do Livro IFRN</h2>
+  <p>Leitura e troca de ideias</p>
+</header>
+
+<nav>
+  <a href="index.html">Início</a>
+  <a href="livros(1).html">Livros</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="discusao.html">Discussões</a>
+  <a href="sobre.html" class="active">Sobre</a>
+  <a href="perfil.html">Perfil</a>
+</nav>
+
+<div class="conteudo">
+  <h1>Sobre o Projeto</h1>
+
+  <p>
+    Este site foi desenvolvido como parte de um projeto acadêmico com o objetivo principal de incentivar
+    o hábito da leitura entre os estudantes do IFRN, utilizando recursos digitais, organização de metas
+    pessoais e interação comunitária.
+  </p>
+
+  <h3>Nossa Missão</h3>
+  <p>
+    Criar um espaço acessível e dinâmico onde os alunos possam descobrir novas obras literárias, 
+    acompanhar seus livros lidos, participar de discussões construtivas e se manter engajados em eventos culturais 
+    e literários promovidos no ambiente escolar.
+  </p>
+
+  <h3>O que você encontra por aqui:</h3>
+  <ul>
+    <li><strong>Livros do Mês:</strong> Seleções especiais de obras literárias com sinopses e marcação interativa de leitura.</li>
+    <li><strong>Agenda de Eventos:</strong> Cronograma de encontros presenciais e virtuais para debates sobre os livros.</li>
+    <li><strong>Espaço de Discussões:</strong> Um canal aberto para troca de ideias e opiniões entre os estudantes.</li>
+    <li><strong>Perfil do Aluno:</strong> Painel individualizado para acompanhar metas de leitura anuais e livros favoritos.</li>
+  </ul>
+
+  <h3>Equipe e Realização</h3>
+  <p>
+    Projeto desenvolvido por estudantes e colaboradores dedicados à valorização da leitura e da cultura 
+    dentro da instituição.
+  </p>
+</div>
+
+<footer>
+  <p>Projeto acadêmico - IFRN</p>
+</footer>
+
+</body>
+</html>
