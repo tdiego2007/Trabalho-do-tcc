@@ -6,6 +6,23 @@
   
 
   <style>
+  .perfil-topo {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #8b5e3c;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
     body{
       margin:0;
       font-family: Arial, sans-serif;
@@ -13,6 +30,7 @@
     }
 
     header{
+      position: relative;
       background:#5c3d2e;
       color:white;
       padding:15px;
@@ -73,6 +91,8 @@
       background:red;
       margin-top:5px;
     }
+
+    
   </style>
 </head>
 
@@ -80,6 +100,10 @@
 
 <header>
   <h2>💬 Espaço de Discussões</h2>
+  <p>Leitura e troca de ideias</p>
+  <a href="perfil_do_aluno.html" class="perfil-topo">
+  👤 Meu Perfil
+  </a>
 </header>
 
 <nav>
