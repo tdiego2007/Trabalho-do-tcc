@@ -35,4 +35,58 @@ router.post("/cadastro", async (req, res) => {
     }
 });
 
+router.post("/login", async (req, res) => {
+    const { usuario, senha } = req.body;
+
+    try {
+        const sql = "SELECT * FROM usuario WHERE email = ? OR matricula = ?";
+
+        connection.query(sql, [usuario, usuario], async (err, resultados) => {
+            if (err) {
+                console.error("Erro ao buscar usuário:", err);
+                return res.status(500).json({
+                    mensagem: "Erro ao consultar o banco de dados."
+                });
+            }
+
+            if (resultados.length === 0) {
+                return res.status(401).json({
+                    mensagem: "E-mail ou matrícula não encontrados."
+                });
+            }
+
+            const usuarioBanco = resultados[0];
+
+            const senhaCorreta = await bcrypt.compare(
+                senha,
+                usuarioBanco.senha
+            );
+
+            if (!senhaCorreta) {
+                return res.status(401).json({
+                    mensagem: "Senha incorreta."
+                });
+            }
+
+            res.status(200).json({
+                mensagem: "Login realizado com sucesso!",
+                usuario: {
+                    id: usuarioBanco.id,
+                    nome: usuarioBanco.nome,
+                    email: usuarioBanco.email,
+                    matricula: usuarioBanco.matricula,
+                    curso: usuarioBanco.curso,
+                    turma: usuarioBanco.turma,
+                    tipo: usuarioBanco.tipo
+                }
+            });
+        });
+    } catch (erro) {
+        console.error("Erro no login:", erro);
+        res.status(500).json({
+            mensagem: "Erro interno no servidor."
+        });
+    }
+});
+
 module.exports = router;
