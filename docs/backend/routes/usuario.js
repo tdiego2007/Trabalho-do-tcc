@@ -10,17 +10,16 @@ router.post("/cadastro", async (req, res) => {
 
     console.log("Dados recebidos do front-end:", req.body);
     
-    const { nome, email, matricula, curso, turma, tipo, senha } = req.body;
-
+        const { nome, email, matricula, curso, turma, senha } = req.body;   
     try {
         // 3. Geramos o hash seguro da senha
         const salt = await bcrypt.genSalt(10);
         const senhaHash = await bcrypt.hash(senha, salt);
 
-        const sql = "INSERT INTO usuario (nome, email, matricula, curso, turma, tipo, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        const sql = "INSERT INTO usuario (nome, email, matricula, curso, turma, senha) VALUES (?, ?, ?, ?, ?, ?)";
 
         // 4. Inserimos a senhaHash (e não a senha limpa) no banco
-        connection.query(sql, [nome, email, matricula, curso, turma, tipo, senhaHash], (err, resultado) => {
+        connection.query(sql, [nome, email, matricula, curso, turma, senhaHash], (err, resultado) => {
             if (err) {
                 console.error("Erro ao cadastrar:", err);
                 return res.status(500).json({ mensagem: "Erro ao cadastrar usuário no banco de dados." });
@@ -67,6 +66,16 @@ router.post("/login", async (req, res) => {
                     mensagem: "Senha incorreta."
                 });
             }
+
+            req.session.usuario = {
+                id: usuarioBanco.id,
+                nome: usuarioBanco.nome,
+                email: usuarioBanco.email,
+                matricula: usuarioBanco.matricula,
+                curso: usuarioBanco.curso,
+                turma: usuarioBanco.turma,
+                tipo: usuarioBanco.tipo
+            };
 
             res.status(200).json({
                 mensagem: "Login realizado com sucesso!",

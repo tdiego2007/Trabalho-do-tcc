@@ -211,3 +211,8 @@ function saveProfile(e) {
 // ===============================
 
 window.onload = loadProfile;
+
+function sair() {
+    localStorage.removeItem("usuarioLogado");
+    location.href = "login.html";
+}

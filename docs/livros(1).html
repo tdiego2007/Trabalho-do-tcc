@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Livros do Mês | Clube do Livro IFRN</title>
+  <title>Biblioteca | Clube do Livro IFRN</title>
   <link rel="stylesheet" href="estilo.css">
+
 </head>
 
-<body>
-
-<header>
-  <h2>📚 Clube do Livro IFRN</h2>
-  <p>Leitura e troca de ideias</p>
-  <a href="perfil_do_aluno.html" class="perfil-topo">
-    👤 Meu Perfil
-  </a>
-</header>
+<body class="pagina-biblioteca">
+  <header>
+    <h2>📚 Clube do Livro IFRN</h2>
+    <p>Leitura e troca de ideias</p>
+    <a href="perfil_do_aluno.html" class="perfil-topo">👤 Meu Perfil</a>
+  </header>
 
 <nav>
   <a href="index.html">Início</a>
@@ -36,171 +34,99 @@
   </p>
 </section>
 
+<div class="cabecalho-biblioteca">
+  <h2>Biblioteca</h2>
+  <button type="button" id="abrirCadastro" class="botao-mais"
+          aria-label="Cadastrar livro" title="Cadastrar livro">+</button>
+</div>
+
 <div class="controles">
-  <input
-    class="busca"
-    id="busca"
-    type="text"
-    placeholder="🔎 Procurar por livro ou autor..."
-    oninput="filtrarLivros()"
-  >
+  <input class="busca" id="busca" type="text"
+         placeholder="🔎 Procurar por livro ou autor...">
 </div>
 
-<div class="container" id="listaLivros">
+<p id="mensagemBiblioteca" class="mensagem-biblioteca" aria-live="polite"></p>
+<div class="container" id="listaLivros"></div>
 
-  <article class="card" data-titulo="Cidades de papel" data-autor="John Green">
-    <div class="capa">
-      <img src="imagens/cidade de papel.jpg" alt="Capa do livro Cidades de papel">
-      <span class="badge">⭐ Destaque</span>
-    </div>
-
-    <div class="info">
-      <h3>Cidades de papel</h3>
-      <p class="autor">John Green</p>
-      <p class="chamada">⭐ E se a pessoa que você mais admira não for exatamente quem você imaginava?</p>
-      <p class="chamada">
-        Margo desaparece deixando uma sequência de pistas. Para Quentin, seguir
-        esse rastro pode significar muito mais do que encontrá-la.
-      </p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          'Cidades de papel',
-          'Quentin sempre enxergou Margo como alguém extraordinária. Quando ela desaparece misteriosamente depois de uma noite inesperada, porém, deixa pistas que parecem ter sido feitas especialmente para ele. A busca por Margo transforma-se em uma viagem cheia de descobertas, amizades e questionamentos sobre a imagem que criamos das pessoas que admiramos.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro1" onclick="queroLer(this,'livro1')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="card" data-titulo="Capitães da Areia" data-autor="Jorge Amado">
-    <div class="capa">
-      <img src="imagens/capitaes da areia.jpg" alt="Capa do livro Capitães da Areia">
-      <span class="badge">🇧🇷 Literatura brasileira</span>
-    </div>
-
-    <div class="info">
-      <h3>Capitães da Areia</h3>
-      <p class="autor">Jorge Amado</p>
-      <p class="chamada">⭐ Eles não têm quase nada — mas têm uns aos outros.</p>
-      <p class="chamada">
-        Nas ruas de Salvador, um grupo de meninos enfrenta abandono, pobreza
-        e preconceito enquanto constrói sua própria ideia de família.
-      </p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          'Capitães da Areia',
-          'Em Salvador, um grupo de meninos abandonados vive pelas ruas e sobrevive como pode. Conhecidos como Capitães da Areia, eles constroem entre si uma espécie de família, enquanto enfrentam a violência, o preconceito e a indiferença da sociedade. A narrativa acompanha seus sonhos, conflitos e relações, mostrando os personagens para além dos rótulos que recebem.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro2" onclick="queroLer(this,'livro2')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="card" data-titulo="1984" data-autor="George Orwell">
-    <div class="capa">
-      <img src="imagens/1984.jpg" alt="Capa do livro 1984">
-      <span class="badge">⚠️ Distopia</span>
-    </div>
-
-    <div class="info">
-      <h3>1984</h3>
-      <p class="autor">George Orwell</p>
-      <p class="chamada">⭐ E se até os seus próprios pensamentos pudessem ser vigiados?</p>
-      <p class="chamada">
-        Winston vive em uma sociedade onde o Estado controla tudo. Ao começar
-        a questionar o sistema, ele descobre que pensar diferente já é perigoso.
-      </p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          '1984',
-          'Winston Smith vive em uma sociedade totalitária na qual o Estado controla informações, comportamentos e até a forma como as pessoas pensam. Trabalhando para alterar registros do passado, ele começa a perceber as contradições do sistema e passa a desejar algo que pode ser extremamente perigoso: liberdade para pensar por conta própria.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro3" onclick="queroLer(this,'livro3')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-  <article class="card" data-titulo="Grande Sertão: Veredas" data-autor="João Guimarães Rosa">
-    <div class="capa">
-      <img src="imagens/Grande Sertão Veredas.jpg" alt="Capa do livro Grande Sertão: Veredas">
-      <span class="badge">⚠️ Distopia</span>
-    </div>
-
-    <div class="info">
-      <h3>Grandes Sertão: Veredas</h3>
-      <p class="autor">João Guimarães Rosa</p>
-      <p class="chamada">⭐ "O correr da vida embrulha tudo, a vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem."</p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          'Grande Sertão: Veredas',
-          'Ao narrar o mundo através dos olhos de Riobaldo, Guimarães Rosa constrói um romance fascinante, que mescla sofrimento, luta, alegria, violência, amor e morte em uma prosa extremamente inventiva. Neste clássico arrebatador, as paisagens percorridas pelos jagunços ganham uma dimensão universal e profundamente humana.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro4" onclick="queroLer(this,'livro4')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-    <article class="card" data-titulo="A Hora da Estrela" data-autor="Clarice Lispector" data-nacionalidade="Brasileira">
-    <div class="capa">
-      <img src="imagens/A_HORA_DA_ESTRELA_3829512788B.jpg" alt="Capa do livro">
-      <span class="badge">⚠️ Distopia</span>
-    </div>
-
-    <div class="info">
-      <h3>A Hora da Estrela</h3>
-      <p class="autor">Clarice Lispector</p>
-      <p class="chamada">⭐Nordestina órfã de pai e mãe, e criada por uma tia que a maltratava muito, Macabéa é uma alagoana pobre de 19 anos que possui um corpo franzino e só come cachorro-quente. Além disso, ela é feia, virgem, tímida, solitária, ignorante, alienada e de poucas palavras.</p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          'A Hora da Estrela',
-          'Marta, uma jovem do interior do Brasil, se muda para o Rio de Janeiro e enfrenta as dificuldades da vida urbana. A obra explora temas como a identidade, o amor e a busca por significado.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro5" onclick="queroLer(this,'livro5')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-    <article class="card" data-titulo="Memórias postumas de Brás Cubas" data-autor="Machado de Assis">
-    <div class="capa">
-      <img src="imagens/memorias-postumas-de-bras-cubas-com-apresentacao-de-geovani-martins.jpg" alt="Capa do livro Memórias postumas de Brás Cubas">
-      <span class="badge">⚠️ Distopia</span>
-    </div>
-
-    <div class="info">
-      <h3>Memórias postumas de Brás Cubas</h3>
-      <p class="autor">Machado de Assis</p>
-      <p class="chamada">⭐ Eu não sou propriamente um autor defunto, mas um defunto autor</p>
-
-      <div class="acoes">
-        <button onclick="verDetalhes(
-          'Memórias postumas de Brás Cubas',
-          'Brás Cubas, após sua morte, relata sua vida e experiências. A obra é uma crítica à sociedade brasileira do século XIX e explora temas como o egoísmo, a hipocrisia e a busca pela identidade.'
-        )">Ver detalhes</button>
-
-        <button data-id="livro6" onclick="queroLer(this,'livro6')">Quero ler</button>
-      </div>
-    </div>
-  </article>
-
-  <p class="vazio" id="vazio">Nenhum livro encontrado. Tente outro título ou autor.</p>
-
+<!-- Janela de detalhes -->
+<div class="janela" id="janelaDetalhes">
+  <div class="janela-conteudo">
+    <button type="button" class="fechar-janela" data-fechar="janelaDetalhes">✕</button>
+    <h2 id="detalheTitulo"></h2>
+    <img id="detalheCapa" class="detalhes-capa" alt="Capa do livro">
+    <p><strong>Autor:</strong> <span id="detalheAutor"></span></p>
+    <p><strong>Ano:</strong> <span id="detalheAno"></span></p>
+    <p><strong>Gênero:</strong> <span id="detalheGenero"></span></p>
+    <p><strong>Categoria:</strong> <span id="detalheCategoria"></span></p>
+    <p><strong>Editora:</strong> <span id="detalheEditora"></span></p>
+    <p><strong>Páginas:</strong> <span id="detalhePaginas"></span></p>
+    <p><strong>Tradutor:</strong> <span id="detalheTradutor"></span></p>
+    <p><strong>Disponibilidade física:</strong> <span id="detalheFisico"></span></p>
+    <p><strong>Leitura online:</strong> <span id="detalheOnline"></span></p>
+    <p id="detalheSinopse"></p>
+    <p><a id="detalheLink" href="#" target="_blank" rel="noopener noreferrer"
+          hidden>Acessar leitura online</a></p>
+  </div>
 </div>
 
-<div class="popup" id="popup" onclick="fecharAoClicarFora(event)">
-  <div class="popup-content">
-    <h2 id="tituloPopup"></h2>
-    <p id="descricao"></p>
-    <button class="fechar" onclick="fecharPopup()">Fechar</button>
+<!-- Janela de cadastro, dentro da Biblioteca -->
+<div class="janela" id="janelaCadastro">
+  <div class="janela-conteudo">
+    <button type="button" class="fechar-janela" data-fechar="janelaCadastro">✕</button>
+    <h2>Cadastrar livro</h2>
+    <p>Os campos marcados com * são obrigatórios.</p>
+
+    <form id="formLivro">
+      <label for="titulo">Título *</label>
+      <input id="titulo" name="titulo" required maxlength="200">
+
+      <label for="autor">Autor *</label>
+      <input id="autor" name="autor" required maxlength="200">
+
+      <label for="capa_url">URL da capa *</label>
+      <input id="capa_url" name="capa_url" type="url" required maxlength="600">
+
+      <label for="ano_publicacao">Ano de publicação *</label>
+      <input id="ano_publicacao" name="ano_publicacao" type="number"
+             min="1" max="9999" required>
+
+      <label for="sinopse">Sinopse *</label>
+      <textarea id="sinopse" name="sinopse" required></textarea>
+
+      <label for="numero_paginas">Número de páginas</label>
+      <input id="numero_paginas" name="numero_paginas" type="number" min="1">
+
+      <label for="editora">Editora</label>
+      <input id="editora" name="editora" maxlength="160">
+
+      <label for="genero">Gênero</label>
+      <input id="genero" name="genero" maxlength="120">
+
+      <label for="categoria">Categoria</label>
+      <input id="categoria" name="categoria" maxlength="120">
+
+      <label for="tradutor">Tradutor</label>
+      <input id="tradutor" name="tradutor" maxlength="180">
+
+      <label>
+        <input type="checkbox" id="disponibilidade_fisica"
+               name="disponibilidade_fisica">
+        Disponível fisicamente no instituto
+      </label>
+
+      <label for="plataforma_online">Plataforma online</label>
+      <input id="plataforma_online" name="plataforma_online" maxlength="180">
+
+      <label for="url_leitura">Link para leitura</label>
+      <input id="url_leitura" name="url_leitura" type="url" maxlength="600">
+
+      <p id="mensagemCadastro" aria-live="polite"></p>
+
+      <div class="botoes-formulario">
+        <button type="submit" id="salvarLivro">Cadastrar livro</button>
+        <button type="button" data-fechar="janelaCadastro">Cancelar</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -208,82 +134,6 @@
   <p>Projeto acadêmico - IFRN</p>
 </footer>
 
-<script>
-  function verDetalhes(titulo, descricao){
-    document.getElementById("tituloPopup").innerText = titulo;
-    document.getElementById("descricao").innerText = descricao;
-    document.getElementById("popup").style.display = "flex";
-  }
-
-  function fecharPopup(){
-    document.getElementById("popup").style.display = "none";
-  }
-
-  function fecharAoClicarFora(event){
-    if(event.target.id === "popup"){
-      fecharPopup();
-    }
-  }
-
-  function queroLer(botao, idLivro){
-    let estado = localStorage.getItem(idLivro);
-
-    if(estado === "lido"){
-      botao.innerText = "Quero ler";
-      botao.classList.remove("lido");
-      localStorage.setItem(idLivro, "quero");
-    }else{
-      botao.innerText = "Lido ✔";
-      botao.classList.add("lido");
-      localStorage.setItem(idLivro, "lido");
-    }
-  }
-
-  function carregarEstados(){
-    const livros = ["livro1","livro2","livro3","livro4","livro5","livro6"];
-
-    livros.forEach(function(id){
-      const botao = document.querySelector(`[data-id="${id}"]`);
-      const estado = localStorage.getItem(id);
-
-      if(botao && estado === "lido"){
-        botao.innerText = "Lido ✔";
-        botao.classList.add("lido");
-      }
-    });
-  }
-
-  function filtrarLivros(){
-    const termo = document.getElementById("busca").value
-      .toLowerCase()
-      .trim();
-
-    const cards = document.querySelectorAll(".card");
-    let encontrados = 0;
-
-    cards.forEach(function(card){
-      const titulo = card.dataset.titulo.toLowerCase();
-      const autor = card.dataset.autor.toLowerCase();
-
-      const aparece = titulo.includes(termo) || autor.includes(termo);
-
-      card.style.display = aparece ? "flex" : "none";
-
-      if(aparece) encontrados++;
-    });
-
-    document.getElementById("vazio").style.display =
-      encontrados === 0 ? "block" : "none";
-  }
-
-  document.addEventListener("keydown", function(event){
-    if(event.key === "Escape"){
-      fecharPopup();
-    }
-  });
-
-  window.onload = carregarEstados;
-</script>
-
+<script src="biblioteca.js"></script>
 </body>
 </html>
