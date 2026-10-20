@@ -24,37 +24,18 @@ let perfilData = {
         foto_url: ""
     },
 
-    // Por enquanto continuam simulados
     estatisticas: {
-        totalLidos: 8,
+        totalLidos: 0,
         metaObjetivo: 12,
-        progressoPercentual: 67
+        progressoPercentual: 0
     },
 
-    livrosLidos: [
-        {
-            id: 1,
-            titulo: "Cidades de Papel",
-            autor: "John Green",
-            capa: "cidade de papel.jpg"
-        },
-        {
-            id: 2,
-            titulo: "1984",
-            autor: "George Orwell",
-            capa: "1984.jpg"
-        }
-    ],
+    // Estas três listas vêm do banco (preenchidas em carregarLivrosDoBanco)
+    livrosLidos: [],
+    livrosFavoritos: [],
+    livrosLerDepois: [],
 
-    livrosFavoritos: [
-        {
-            id: 2,
-            titulo: "1984",
-            autor: "George Orwell",
-            capa: "1984.jpg"
-        }
-    ],
-
+    // Por enquanto continuam simulados
     eventosInscritos: [
         {
             id: 101,
@@ -65,7 +46,6 @@ let perfilData = {
         }
     ]
 };
-
 
 // ===============================
 // TROCA DE ABAS
@@ -99,6 +79,72 @@ function closePopup() {
     document.getElementById("editPopup").style.display = "none";
 }
 
+// ===============================
+// LIVROS DO BANCO
+// ===============================
+
+// Impede que texto vindo do banco vire código HTML na tela
+function escapeHtml(texto) {
+    return String(texto ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+// Pede ao servidor os livros marcados pelo usuário e separa nas três listas
+async function carregarLivrosDoBanco() {
+    try {
+        const resposta = await fetch("/api/livros/minhas-acoes", {
+            credentials: "same-origin"
+        });
+
+        // 401 = o servidor não reconhece o login (a sessão expirou)
+        if (resposta.status === 401) {
+            alert("Sua sessão expirou. Entre novamente.");
+            localStorage.removeItem("usuarioLogado");
+            location.href = "login.html";
+            return;
+        }
+
+        if (!resposta.ok) {
+            throw new Error("Não foi possível buscar os livros.");
+        }
+
+        const livros = await resposta.json();
+
+        perfilData.livrosLidos = livros.filter(livro => livro.lido);
+        perfilData.livrosFavoritos = livros.filter(livro => livro.gostou);
+        perfilData.livrosLerDepois = livros.filter(livro => livro.ler_depois);
+
+        // Meta de leitura calculada com os livros lidos de verdade
+        const total = perfilData.livrosLidos.length;
+        const meta = perfilData.estatisticas.metaObjetivo;
+
+        perfilData.estatisticas.totalLidos = total;
+        perfilData.estatisticas.progressoPercentual =
+            Math.min(100, Math.round((total / meta) * 100));
+
+    } catch (erro) {
+        console.error(erro);
+    }
+}
+
+// Monta os cards de uma lista de livros (ou uma mensagem, se estiver vazia)
+function montarCards(livros, mensagemVazia) {
+    if (livros.length === 0) {
+        return `<p>${mensagemVazia}</p>`;
+    }
+
+    return livros.map(livro => `
+        <div class="card-livro">
+            <img src="${escapeHtml(livro.capa_url)}" alt="${escapeHtml(livro.titulo)}">
+            <h4>${escapeHtml(livro.titulo)}</h4>
+            <p>${escapeHtml(livro.autor)}</p>
+        </div>
+    `).join("");
+}
 
 // ===============================
 // CARREGAR PERFIL
@@ -153,28 +199,15 @@ function loadProfile() {
         `${data.estatisticas.progressoPercentual}%`;
 
 
-    // Livros lidos
+    // Livros lidos, favoritos e para ler depois (vindos do banco)
     document.getElementById("gridLidos").innerHTML =
-        data.livrosLidos.map(livro => `
-            <div class="card-livro">
-                <img src="${livro.capa}" alt="${livro.titulo}">
-                <h4>${livro.titulo}</h4>
-                <p>${livro.autor}</p>
-            </div>
-        `).join("");
+        montarCards(data.livrosLidos, "Você ainda não marcou nenhum livro como lido.");
 
-
-    // Livros favoritos
     document.getElementById("gridFavoritos").innerHTML =
-        data.livrosFavoritos.map(livro => `
-            <div class="card-livro">
-                <img src="${livro.capa}" alt="${livro.titulo}">
-                <h4>${livro.titulo}</h4>
-                <p>${livro.autor}</p>
-            </div>
-        `).join("");
+        montarCards(data.livrosFavoritos, "Você ainda não curtiu nenhum livro.");
 
-
+    document.getElementById("gridLerDepois").innerHTML =
+        montarCards(data.livrosLerDepois, "Você ainda não guardou livros para ler depois.");
     // Eventos
     document.getElementById("listEventos").innerHTML =
         data.eventosInscritos.map(evento => `
@@ -210,9 +243,18 @@ function saveProfile(e) {
 // INICIAR PERFIL
 // ===============================
 
-window.onload = loadProfile;
+window.onload = async function () {
+    await carregarLivrosDoBanco(); // primeiro busca os dados no servidor
+    loadProfile();                 // depois desenha a página
+};
 
-function sair() {
+async function sair() {
+    try {
+        await fetch("/usuario/logout", { method: "POST" });
+    } catch (erro) {
+        console.error(erro);
+    }
+
     localStorage.removeItem("usuarioLogado");
     location.href = "login.html";
 }

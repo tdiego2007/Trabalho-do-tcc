@@ -344,6 +344,7 @@
     <button class="tab-btn active" onclick="switchTab(event, 'metas')">📊 Metas & Progresso</button>
     <button class="tab-btn" onclick="switchTab(event, 'lidos')">📚 Livros Lidos</button>
     <button class="tab-btn" onclick="switchTab(event, 'favoritos')">❤️ Favoritos</button>
+    <button class="tab-btn" onclick="switchTab(event, 'lerdepois')">🕒 Ler Depois</button>
     <button class="tab-btn" onclick="switchTab(event, 'eventos')">📅 Eventos Inscritos</button>
   </div>
 
@@ -368,7 +369,12 @@
     <div class="container-livros" id="gridFavoritos"></div>
   </div>
 
-  <!-- Aba 4: Eventos -->
+  <!-- Aba 4: Ler Depois -->
+  <div id="tab-lerdepois" class="tab-content">
+    <div class="container-livros" id="gridLerDepois"></div>
+  </div>
+
+  <!-- Aba 5: Eventos -->
   <div id="tab-eventos" class="tab-content">
     <div id="listEventos"></div>
   </div>
